@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <Letter1></Letter1>
+    </head>
+
+    <body>
+        
+        <h1>local-cookie.js</h1>
+
+        <p>
+            <a href="https://github.com/Wildtyto/LocalCookie.js" target="_blank">https://github.com/Wildtyto/LocalCookie.js</a>
+        </p>
+        
+        <p>Letter1: </p>
+        <input id="Letter1Field" type="text" oninput="onLetter1Input()" />
+        <button onclick="onRemoveClick('Letter1Val')">x</button>
+        <p>Letter2: </p>
+        <input id="Letter2Field" type="text" oninput="onLetter2Input()" />
+        <button onclick="onRemoveClick('Letter2Val')">x</button>
+        <p>
+            <button onclick="window.location.reload()">Reload</button>
+            <button onclick="onClearClick()">Clear</button>
+        </p>
+
+    </body>
+    
+    <script src="../local-cookie.min.js"></script>
+    <script>
+
+        (function (localCookie) {
+
+            "use strict";
+
+            window.onload = function () {
+                    document.getElementById("Letter1Field").value = localCookie["Letter1Val"] || "";
+                    document.getElementById("Letter2Field").value = localCookie.getItem("Letter2Val") || "";
+                };
+
+            window.onLetter1Input = function () {
+                    localCookie["Letter1Val"] = document.getElementById("Letter1Field").value;
+                };
+
+            window.onLetter2Input = function () {
+                    localCookie.setItem("Letter2Val", document.getElementById("Letter2Field").value);
+                };
+
+            window.onRemoveClick = function (_keyName) {
+                    localCookie.removeItem(_keyName);
+                    window.location.reload();
+                };
+
+            window.onClearClick = function () {
+                    localCookie.clear();
+                    window.location.reload();
+                };
+
+        }(window.localCookie));
+
+    </script>
+
+</html>
